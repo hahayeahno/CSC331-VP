@@ -35,4 +35,10 @@ public class Deck {
 	public Card getCard(int index) {
 		return deck[index];
 	}
+	
+	public Card getTopCard() {
+		Card topCard = deck[0];
+		
+		return topCard;
+	}
 }

@@ -36,8 +36,8 @@ package videoPoker;
  */
 
 public class Game {
-	static String WIN_TYPES[] = {"One Pair","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};	
-
+	final static String WIN_TYPES[] = {"You lose", "One Pair","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};	
+	static String winType;
 	public static void main(String[] args) {
 		Deck deck = new Deck();
 		Hand hand = new Hand();
@@ -60,37 +60,43 @@ public class Game {
 		hand.setFourthCard(deck.getCard(3));
 		hand.setFifthCard(deck.getCard(4));
 	}
+	
+	public static void swapCards() {
+		//choose which cards to swap
+		//swap them with a new card from deck
+	}
+	
 	public static void checkWin(Hand hand) {
-		boolean deleteme = false;
+		
 		if (isRoyalFlush()) { // Royal Flush
-			
+			winType = WIN_TYPES[9];
 		}
-		else if (deleteme) { //Straight Flush
-			
+		else if (isStraightFlush()) { //Straight Flush
+			winType = WIN_TYPES[8];
 		}
-		else if (deleteme) { //Four of a kind
-			
+		else if (isFourOfAKind()) { //Four of a kind
+			winType = WIN_TYPES[7];
 		}
-		else if (deleteme) { //Full house
-			
+		else if (isFullHouse()) { //Full house
+			winType = WIN_TYPES[6];
 		}
-		else if (deleteme) { //Flush
-			
+		else if (isFlush()) { //Flush
+			winType = WIN_TYPES[5];
 		}
-		else if (deleteme) { //Straight
-			
+		else if (isStraight()) { //Straight
+			winType = WIN_TYPES[4];
 		}
-		else if (deleteme) { //three of a kind
-			
+		else if (isThreeOfAKind()) { //three of a kind
+			winType = WIN_TYPES[3];
 		}
-		else if (deleteme) { //two pair
-			
+		else if (isTwoPair()) { //two pair
+			winType = WIN_TYPES[2];
 		}
-		else if (deleteme) { //pair (jack at least
-			
+		else if (isPair()) { //pair (jack at least
+			winType = WIN_TYPES[1];
 		}
 		else { //you lose 
-			
+			winType = WIN_TYPES[0];
 		}
 	}
 	
@@ -128,5 +134,9 @@ public class Game {
 	
 	public static boolean isPair() {
 		return false;
+	}
+	
+	public static void play() {
+		
 	}
 }
