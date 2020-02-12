@@ -62,7 +62,7 @@ public class Game {
 	}
 	public static void checkWin(Hand hand) {
 		boolean deleteme = false;
-		if (deleteme) { // Royal Flush
+		if (isRoyalFlush()) { // Royal Flush
 			
 		}
 		else if (deleteme) { //Straight Flush
@@ -89,8 +89,44 @@ public class Game {
 		else if (deleteme) { //pair (jack at least
 			
 		}
-		else {
+		else { //you lose 
 			
 		}
+	}
+	
+	public static boolean isRoyalFlush() {
+		return false;
+	}
+	
+	public static boolean isStraightFlush() {
+		return false;
+	}
+	
+	public static boolean isFourOfAKind() {
+		return false;
+	}
+	
+	public static boolean isFullHouse() {
+		return false;
+	}
+	
+	public static boolean isFlush() {
+		return false;
+	}
+	
+	public static boolean isStraight() {
+		return false;
+	}
+	
+	public static boolean isThreeOfAKind() {
+		return false;
+	}
+	
+	public static boolean isTwoPair() {
+		return false;
+	}
+	
+	public static boolean isPair() {
+		return false;
 	}
 }
