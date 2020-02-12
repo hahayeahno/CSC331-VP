@@ -43,22 +43,19 @@ public class Game {
 		Hand hand = new Hand();
 		
 		deck.shuffle();
-		deck.shuffle();
-		deck.shuffle();
-		deck.shuffle();
-		deck.shuffle();
 		deck.print();
 		deal(hand, deck);
 		hand.print();
-		//deck.shuffle();	
+		deck.print();
+			
 	}
 	
 	public static void deal(Hand hand, Deck deck) {
-		hand.setFirstCard(deck.getCard(0));
-		hand.setSecondCard(deck.getCard(1));
-		hand.setThirdCard(deck.getCard(2));
-		hand.setFourthCard(deck.getCard(3));
-		hand.setFifthCard(deck.getCard(4));
+		hand.setFirstCard(deck.getTopCard());
+		hand.setSecondCard(deck.getTopCard());
+		hand.setThirdCard(deck.getTopCard());
+		hand.setFourthCard(deck.getTopCard());
+		hand.setFifthCard(deck.getTopCard());
 	}
 	
 	public static void swapCards() {
