@@ -41,16 +41,24 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Deck deck = new Deck();
-		Hand hand = new Hand();
+		Hand hand = new Hand(new Card(10, 0), new Card(10, 1), new Card(10, 2), new Card(10, 3), new Card(1, 0));
+		
+		
 		
 		deck.shuffle();
 		//deck.print();
-		deal(hand, deck);
-		hand.print();
-		hand.sort();
+		//deal(hand, deck);
+		//hand.print();
+		//System.out.println();
+		//hand.sortBySuit();
+		//hand.print();
+		//System.out.println();
+		
+		//hand.sortByRank();
 		hand.print();
 		//deck.print();
-			
+		System.out.println(isFourOfAKind(hand));
+		
 	}
 	
 	public static void deal(Hand hand, Deck deck) {
@@ -102,7 +110,8 @@ public class Game {
 	}
 	
 	public static boolean isRoyalFlush(Hand hand) {
-		if (isStraightFlush(hand) && (hand.getFirstCard().getValue() == 10)) {
+		hand.sortByRank();
+		if (isStraightFlush(hand) && (hand.getFirstCard().getValue() == 1)) { //works
 			return true;
 		}
 		else {
@@ -110,7 +119,7 @@ public class Game {
 		}
 	}
 	
-	public static boolean isStraightFlush(Hand hand) {
+	public static boolean isStraightFlush(Hand hand) { //works
 		if (isStraight(hand) && isFlush(hand)) {
 			return true;
 		}
@@ -119,20 +128,35 @@ public class Game {
 		}
 	}
 	
-	public static boolean isFourOfAKind(Hand hand) { //tedious
-		if (true) {
+	public static boolean isFourOfAKind(Hand hand) { //works
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
+		
+		if (arr[0].getValue() == arr [1].getValue()) {
+			for (int i = 1; i < arr.length - 1; i++) {
+				if (arr[i].getValue() != arr[i-1].getValue()) {
+					return false;
+				}
+			}
 			return true;
 		}
 		else {
-			return false;
+			for (int i = 2; i < arr.length; i ++) {
+				if (arr[i].getValue() != arr[i-1].getValue()) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 	
-	public static boolean isFullHouse(Hand hand) {
+	public static boolean isFullHouse(Hand hand) { //TODO
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
 		return false;
 	}
 	
-	public static boolean isFlush(Hand hand) {
+	public static boolean isFlush(Hand hand) { //works
 		Card[] arr = hand.getArray();
 		int suit = arr[0].getSuit();
 		for (int i = 0; i < arr.length; i++) {
@@ -140,24 +164,49 @@ public class Game {
 				return false;
 			}
 		}
-		
 		return true;
 		
 	}
 	
-	public static boolean isStraight(Hand hand) {
+	public static boolean isStraight(Hand hand) { //works
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
+		
+		if(arr[1].getValue() == 10) { //when the straight starts at 10, it will wrap around to ace, which is valued at 1 and not 14. needs special case
+			for (int i = 2; i < arr.length; i ++) {
+				if (arr[i].getValue() != arr[i-1].getValue() + 1) {
+					return false;
+				}
+			}
+			if (arr[0].getValue() != 1) {
+				return false;
+			}
+		}
+		else { //literally every other case
+			for (int i = 1; i < arr.length; i++) {
+				if(arr[i].getValue() != arr[i-1].getValue() + 1) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public static boolean isThreeOfAKind(Hand hand) { //TODO
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
 		return false;
 	}
 	
-	public static boolean isThreeOfAKind(Hand hand) {
+	public static boolean isTwoPair(Hand hand) { //TODO
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
 		return false;
 	}
 	
-	public static boolean isTwoPair(Hand hand) {
-		return false;
-	}
-	
-	public static boolean isPair(Hand hand) {
+	public static boolean isPair(Hand hand) { //TODO
+		hand.sortByRank();
+		Card[] arr = hand.getArray();
 		return false;
 	}
 	

@@ -63,13 +63,32 @@ public class Hand {
 		this.fifthCard = fifthCard;
 	}
 	
-	public void sort() {
+	public void sortBySuit() {
 		
 		Card arr[] = {getFirstCard(), getSecondCard(), getThirdCard(), getFourthCard(), getFifthCard()};
 
 		for (int i = 0; i < arr.length - 1; i ++) {		//Bubble sort because its 5 items
 			for (int j = 0; j < arr.length - i - 1; j++) {
-				if (arr[j].getSortValue() > arr[j+1].getSortValue()) {
+				if (arr[j].getSortBySuitValue() > arr[j+1].getSortBySuitValue()) {
+					Card temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		setFirstCard(arr[0]);
+		setSecondCard(arr[1]);
+		setThirdCard(arr[2]);
+		setFourthCard(arr[3]);
+		setFifthCard(arr[4]);
+	}
+	
+	public void sortByRank() {
+		Card arr[] = {getFirstCard(), getSecondCard(), getThirdCard(), getFourthCard(), getFifthCard()};
+
+		for (int i = 0; i < arr.length - 1; i ++) {		//Bubble sort because its 5 items
+			for (int j = 0; j < arr.length - i - 1; j++) {
+				if (arr[j].getSortByRankValue() > arr[j+1].getSortByRankValue()) {
 					Card temp = arr[j];
 					arr[j] = arr[j+1];
 					arr[j+1] = temp;

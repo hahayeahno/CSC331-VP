@@ -30,8 +30,12 @@ public class Card {
 		this.suit = suit;
 	}
 	
-	public int getSortValue() {
+	public int getSortBySuitValue() {
 		return ((getSuit() * 13) + (getValue()));
+	}
+	
+	public int getSortByRankValue() {
+		return ((getValue()*4) + getSuit());
 	}
 	
 	@Override
