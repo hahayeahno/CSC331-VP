@@ -38,15 +38,18 @@ package videoPoker;
 public class Game {
 	final static String WIN_TYPES[] = {"You lose", "One Pair","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};	
 	static String winType;
+	
 	public static void main(String[] args) {
 		Deck deck = new Deck();
 		Hand hand = new Hand();
 		
 		deck.shuffle();
-		deck.print();
+		//deck.print();
 		deal(hand, deck);
 		hand.print();
-		deck.print();
+		hand.sort();
+		hand.print();
+		//deck.print();
 			
 	}
 	
@@ -63,73 +66,98 @@ public class Game {
 		//swap them with a new card from deck
 	}
 	
-	public static void checkWin(Hand hand) {
+	public static String checkWin(Hand hand) {
 		
-		if (isRoyalFlush()) { // Royal Flush
+		if (isRoyalFlush(hand)) { // Royal Flush
 			winType = WIN_TYPES[9];
 		}
-		else if (isStraightFlush()) { //Straight Flush
+		else if (isStraightFlush(hand)) { //Straight Flush
 			winType = WIN_TYPES[8];
 		}
-		else if (isFourOfAKind()) { //Four of a kind
+		else if (isFourOfAKind(hand)) { //Four of a kind
 			winType = WIN_TYPES[7];
 		}
-		else if (isFullHouse()) { //Full house
+		else if (isFullHouse(hand)) { //Full house
 			winType = WIN_TYPES[6];
 		}
-		else if (isFlush()) { //Flush
+		else if (isFlush(hand)) { //Flush
 			winType = WIN_TYPES[5];
 		}
-		else if (isStraight()) { //Straight
+		else if (isStraight(hand)) { //Straight
 			winType = WIN_TYPES[4];
 		}
-		else if (isThreeOfAKind()) { //three of a kind
+		else if (isThreeOfAKind(hand)) { //three of a kind
 			winType = WIN_TYPES[3];
 		}
-		else if (isTwoPair()) { //two pair
+		else if (isTwoPair(hand)) { //two pair
 			winType = WIN_TYPES[2];
 		}
-		else if (isPair()) { //pair (jack at least
+		else if (isPair(hand)) { //pair (jack at least
 			winType = WIN_TYPES[1];
 		}
 		else { //you lose 
 			winType = WIN_TYPES[0];
 		}
+		return winType;
 	}
 	
-	public static boolean isRoyalFlush() {
+	public static boolean isRoyalFlush(Hand hand) {
+		if (isStraightFlush(hand) && (hand.getFirstCard().getValue() == 10)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean isStraightFlush(Hand hand) {
+		if (isStraight(hand) && isFlush(hand)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean isFourOfAKind(Hand hand) { //tedious
+		if (true) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean isFullHouse(Hand hand) {
 		return false;
 	}
 	
-	public static boolean isStraightFlush() {
+	public static boolean isFlush(Hand hand) {
+		Card[] arr = hand.getArray();
+		int suit = arr[0].getSuit();
+		for (int i = 0; i < arr.length; i++) {
+			if(arr[i].getSuit() != suit) {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
+	
+	public static boolean isStraight(Hand hand) {
 		return false;
 	}
 	
-	public static boolean isFourOfAKind() {
+	public static boolean isThreeOfAKind(Hand hand) {
 		return false;
 	}
 	
-	public static boolean isFullHouse() {
+	public static boolean isTwoPair(Hand hand) {
 		return false;
 	}
 	
-	public static boolean isFlush() {
-		return false;
-	}
-	
-	public static boolean isStraight() {
-		return false;
-	}
-	
-	public static boolean isThreeOfAKind() {
-		return false;
-	}
-	
-	public static boolean isTwoPair() {
-		return false;
-	}
-	
-	public static boolean isPair() {
+	public static boolean isPair(Hand hand) {
 		return false;
 	}
 	

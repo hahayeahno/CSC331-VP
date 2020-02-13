@@ -30,6 +30,10 @@ public class Card {
 		this.suit = suit;
 	}
 	
+	public int getSortValue() {
+		return ((getSuit() * 13) + (getValue()));
+	}
+	
 	@Override
 	public String toString() {
 		return (ranks[value] + " of " + suits[suit]);

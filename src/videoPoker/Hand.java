@@ -2,7 +2,7 @@ package videoPoker;
 
 //maybe
 
-public class Hand extends Deck{
+public class Hand {
 
 	private Card firstCard;
 	private Card secondCard;
@@ -61,6 +61,31 @@ public class Hand extends Deck{
 
 	public void setFifthCard(Card fifthCard) {
 		this.fifthCard = fifthCard;
+	}
+	
+	public void sort() {
+		
+		Card arr[] = {getFirstCard(), getSecondCard(), getThirdCard(), getFourthCard(), getFifthCard()};
+
+		for (int i = 0; i < arr.length - 1; i ++) {		//Bubble sort because its 5 items
+			for (int j = 0; j < arr.length - i - 1; j++) {
+				if (arr[j].getSortValue() > arr[j+1].getSortValue()) {
+					Card temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+				}
+			}
+		}
+		setFirstCard(arr[0]);
+		setSecondCard(arr[1]);
+		setThirdCard(arr[2]);
+		setFourthCard(arr[3]);
+		setFifthCard(arr[4]);
+	}
+	
+	public Card[] getArray() {
+		Card[] arr = {firstCard, secondCard, thirdCard, fourthCard, fifthCard};
+		return arr;
 	}
 	
 	public void print() {
