@@ -33,6 +33,10 @@ package videoPoker;
  * 8. shuffle cards again
  * 9. check if player wants to cash out or play again.
  * 10. kill or repeat
+ * 
+ * 
+ * 
+ * todo: , full house, swap cards
  */
 
 public class Game {
@@ -41,7 +45,7 @@ public class Game {
 	
 	public static void main(String[] args) {
 		Deck deck = new Deck();
-		Hand hand = new Hand(new Card(10, 0), new Card(10, 1), new Card(10, 2), new Card(10, 3), new Card(1, 0));
+		Hand hand = new Hand(new Card(2, 0), new Card(2, 1), new Card(1, 2), new Card(2, 3), new Card(1, 0));
 		
 		
 		
@@ -57,7 +61,7 @@ public class Game {
 		//hand.sortByRank();
 		hand.print();
 		//deck.print();
-		System.out.println(isFourOfAKind(hand));
+		System.out.println(checkWin(hand));
 		
 	}
 	
@@ -153,6 +157,20 @@ public class Game {
 	public static boolean isFullHouse(Hand hand) { //TODO
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
+		if (arr[0].getValue() == arr[2].getValue()) {
+			if (arr[0].getValue() == arr[1].getValue()) {
+				if (arr[3].getValue() == arr[4].getValue()) {
+					return true;
+				}
+			}
+		}
+		else if (arr[0].getValue() == arr[1].getValue()) {
+			if (arr[2].getValue() == arr[3].getValue()) {
+				if (arr[3].getValue() == arr[4].getValue()) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 	
@@ -192,21 +210,48 @@ public class Game {
 		return true;
 	}
 	
-	public static boolean isThreeOfAKind(Hand hand) { //TODO
+	public static boolean isThreeOfAKind(Hand hand) { //works
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
+		if ((arr[0].getValue() == arr[1].getValue()) && (arr[1].getValue() == arr[2].getValue())) {
+			return true;
+		}
+		else if ((arr[1].getValue() == arr[2].getValue()) && (arr[2].getValue() == arr[3].getValue())) {
+			return true;
+		}
+		else if ((arr[2].getValue() == arr[3].getValue()) && (arr[3].getValue() == arr[4].getValue())) {
+			return true;
+		}
 		return false;
 	}
 	
-	public static boolean isTwoPair(Hand hand) { //TODO
+	public static boolean isTwoPair(Hand hand) { //works
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
+		if (arr[0].getValue() == arr[1].getValue()) {
+			if (arr[2].getValue() == arr[3].getValue()) {
+				return true;
+			}
+			if (arr[3].getValue() == arr[4].getValue()) {
+				return true;
+			}
+		}
+		else if (arr[1].getValue() == arr[2].getValue()) {
+			if (arr[3].getValue() == arr[4].getValue()) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
-	public static boolean isPair(Hand hand) { //TODO
+	public static boolean isPair(Hand hand) { //works
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
+		for (int i = 0; i < arr.length -1; i++) {
+			if (arr[i].getValue() == arr[i+1].getValue()) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
