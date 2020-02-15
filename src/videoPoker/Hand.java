@@ -108,11 +108,11 @@ public class Hand {
 	}
 	
 	public void print() {
-		System.out.println(firstCard);
-		System.out.println(secondCard);
-		System.out.println(thirdCard);
-		System.out.println(fourthCard);
-		System.out.println(fifthCard);
+		System.out.println("Card 1:\t" + firstCard);
+		System.out.println("Card 2:\t" + secondCard);
+		System.out.println("Card 3:\t" + thirdCard);
+		System.out.println("Card 4:\t" + fourthCard);
+		System.out.println("Card 5:\t" + fifthCard);
 		
 	}
 

@@ -1,5 +1,9 @@
 package videoPoker;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+//import java.util.string;
 /*
  * winning hands:				odds			payout:		condition:
  * pair jacks or better 		1.36:1			1:1			a pair higher than a jack
@@ -36,22 +40,28 @@ package videoPoker;
  * 
  * 
  * 
- * todo: , full house, swap cards
+ * todo: swap cards, payout
  */
 
 public class Game {
 	final static String WIN_TYPES[] = {"You lose", "One Pair","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};	
 	//static String winType;
+	private Deck deck = new Deck();
+	private Hand hand = new Hand();
 	
-	
-	public static void main(String[] args) {
-			
-
-		
-		testWins();
+	public Game() {
+		deck = new Deck();
+		hand = new Hand();
 	}
 	
-	public static void deal(Hand hand, Deck deck) {
+	/*
+	public static void main(String[] args) {
+
+		play();
+	}
+	*/
+	
+	public void deal(Hand hand, Deck deck) {
 		hand.setFirstCard(deck.getTopCard());
 		hand.setSecondCard(deck.getTopCard());
 		hand.setThirdCard(deck.getTopCard());
@@ -59,12 +69,45 @@ public class Game {
 		hand.setFifthCard(deck.getTopCard());
 	}
 	
-	public static void swapCards() {
+	public void swapCards(Hand hand) {
 		//choose which cards to swap
 		//swap them with a new card from deck
+		List<Integer> toSwap = new ArrayList<Integer>();
+		Scanner in = new Scanner(System.in);
+		System.out.println("Please enter which cards you would like to swap as comma separated integers (ex. 1, 2, 4)");
+		String input = in.nextLine();			//TODO: Make user-proof
+		String [] strToSwap = input.split(", ");
+		for (int i = 0; i < strToSwap.length; i++) {
+			toSwap.add(Integer.parseInt(strToSwap[i]));
+		}
+		in.close();
+		System.out.println(toSwap.toString());
+		for (int i = 0; i < toSwap.size(); i++) {
+			int cardnum = toSwap.get(i);
+			if (cardnum == 1) {
+				hand.setFirstCard(deck.getTopCard());
+			}
+			else if (cardnum == 2) {
+				hand.setSecondCard(deck.getTopCard());
+			}
+			else if (cardnum == 3) {
+				hand.setThirdCard(deck.getTopCard());
+			}
+			else if (cardnum == 4) {
+				hand.setFourthCard(deck.getTopCard());
+			}
+			else if (cardnum == 5) {
+				hand.setFifthCard(deck.getTopCard());
+			}
+			else {
+				
+			}
+
+		}
+		
 	}
 	
-	public static String checkWin(Hand hand) {
+	public String checkWin(Hand hand) {
 		String winType;
 		if (isRoyalFlush(hand)) { 
 			winType = WIN_TYPES[9];
@@ -99,7 +142,7 @@ public class Game {
 		return winType;
 	}
 	
-	public static boolean isRoyalFlush(Hand hand) {
+	public boolean isRoyalFlush(Hand hand) {
 		hand.sortByRank();
 		if (isStraightFlush(hand) && (hand.getFirstCard().getValue() == 1)) {
 			return true;
@@ -109,7 +152,7 @@ public class Game {
 		}
 	}
 	
-	public static boolean isStraightFlush(Hand hand) { 
+	public boolean isStraightFlush(Hand hand) { 
 		if (isStraight(hand) && isFlush(hand)) {
 			return true;
 		}
@@ -118,7 +161,7 @@ public class Game {
 		}
 	}
 	
-	public static boolean isFourOfAKind(Hand hand) { 
+	public boolean isFourOfAKind(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		
@@ -140,7 +183,7 @@ public class Game {
 		}
 	}
 	
-	public static boolean isFullHouse(Hand hand) { 
+	public boolean isFullHouse(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		if (arr[0].getValue() == arr[2].getValue()) {
@@ -160,7 +203,7 @@ public class Game {
 		return false;
 	}
 	
-	public static boolean isFlush(Hand hand) { 
+	public boolean isFlush(Hand hand) { 
 		Card[] arr = hand.getArray();
 		int suit = arr[0].getSuit();
 		for (int i = 0; i < arr.length; i++) {
@@ -172,7 +215,7 @@ public class Game {
 		
 	}
 	
-	public static boolean isStraight(Hand hand) { 
+	public boolean isStraight(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		
@@ -196,7 +239,7 @@ public class Game {
 		return true;
 	}
 	
-	public static boolean isThreeOfAKind(Hand hand) { 
+	public boolean isThreeOfAKind(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		if ((arr[0].getValue() == arr[1].getValue()) && (arr[1].getValue() == arr[2].getValue())) {
@@ -211,7 +254,7 @@ public class Game {
 		return false;
 	}
 	
-	public static boolean isTwoPair(Hand hand) { //works
+	public boolean isTwoPair(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		if (arr[0].getValue() == arr[1].getValue()) {
@@ -230,7 +273,7 @@ public class Game {
 		return false;
 	}
 	
-	public static boolean isPair(Hand hand) { 
+	public boolean isPair(Hand hand) { 
 		hand.sortByRank();
 		Card[] arr = hand.getArray();
 		for (int i = 0; i < arr.length -1; i++) {
@@ -243,29 +286,22 @@ public class Game {
 		return false;
 	}
 	
-	public static String play() {
-		Deck deck = new Deck();
-		Hand hand = new Hand();
-		//Hand hand = new Hand(new Card(3, 0), new Card(2, 1), new Card(1, 2), new Card(2, 3), new Card(11, 0));
-		
+	public String play() {
 		deck.shuffle();
-		//deck.print();
 		deal(hand, deck);
-		//hand.print();
-		//System.out.println();
-		//hand.sortBySuit();
-		//hand.print();
-		//System.out.println();
-		
 		hand.sortByRank();
-		//hand.print();
-		//deck.print();
-		//System.out.println();
-		//System.out.println(checkWin(hand));
-		return checkWin(hand);
+		hand.print();
+		System.out.println();
+		
+		swapCards(hand);
+		hand.sortByRank();
+		hand.print();
+		
+		System.out.println(checkWin(hand));
+		return checkWin(hand); //only for the play tests, might remove later
 	}
 	
-	public static void testWins() {
+	public void testWins() {
 		String str;
 		int[] testWins = {0,0,0,0,0,0,0,0,0,0};
 		
