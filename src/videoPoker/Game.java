@@ -54,13 +54,6 @@ public class Game {
 		hand = new Hand();
 	}
 	
-	/*
-	public static void main(String[] args) {
-
-		play();
-	}
-	*/
-	
 	public void deal(Hand hand, Deck deck) {
 		hand.setFirstCard(deck.getTopCard());
 		hand.setSecondCard(deck.getTopCard());
@@ -80,7 +73,7 @@ public class Game {
 		for (int i = 0; i < strToSwap.length; i++) {
 			toSwap.add(Integer.parseInt(strToSwap[i]));
 		}
-		in.close();
+		//in.close();
 		System.out.println(toSwap.toString());
 		for (int i = 0; i < toSwap.size(); i++) {
 			int cardnum = toSwap.get(i);
