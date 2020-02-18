@@ -16,6 +16,11 @@ import java.util.Scanner;
  * Straight Flush				72192:1			50:1		Straight of one suit
  * Royal Flush					649739:1		250:1		Ace high straight of one suit(10,jack,queen,king,ace)
  * 
+ * real odds
+ * pair of anything				2.37:1
+ * pair of jacks or better		7.7:1		from math
+ * everything else is correct
+ * 
  * Rules:
  * 1: shuffle deck
  * 2: player makes bet before getting cards
@@ -40,7 +45,7 @@ import java.util.Scanner;
  * 
  * 
  * 
- * TODO: make user safe
+ * TODO: make user friendly
  */
 
 public class Game {
@@ -293,31 +298,38 @@ public class Game {
 		hand.print();
 		
 		System.out.println(checkWin(hand));
-		return checkWin(hand); //only for the play tests, might remove later
+		return checkWin(hand);
+	}
+	
+	public String testPlay() {
+		deck.shuffle();
+		deal(hand, deck);
+		hand.sortByRank();
+		return checkWin(hand);
 	}
 	
 	public void testWins() {
 		String str;
 		int[] testWins = {0,0,0,0,0,0,0,0,0,0};
-		
-		for (int i = 0; i < 100000; i++) {
-			str = play();
+		int num = 1000000;
+		for (int i = 0; i < num; i++) {
+			str = testPlay();
 			for (int j = 0; j < WIN_TYPES.length; j++) {
 				if(WIN_TYPES[j] == str) {
 					testWins[j] = testWins[j] + 1;
 				}
 			}
 		}
-		System.out.println("loss: \t\t" + testWins[0]);
-		System.out.println("pair: \t\t" + testWins[1]);
-		System.out.println("2pair: \t\t" + testWins[2]);
-		System.out.println("3kind: \t\t" + testWins[3]);
-		System.out.println("str8: \t\t" + testWins[4]);
-		System.out.println("flush: \t\t" + testWins[5]);
-		System.out.println("fullhouse: \t" + testWins[6]);
-		System.out.println("4kind: \t\t" + testWins[7]);
-		System.out.println("str8flush: \t" + testWins[8]);
-		System.out.println("royal: \t\t" + testWins[9]);
+		System.out.println("loss: \t\t" + testWins[0] + "\t percent:\t" + (double)testWins[0]/num);
+		System.out.println("pair: \t\t" + testWins[1] + "\t percent:\t" + (double)testWins[1]/num);
+		System.out.println("2pair: \t\t" + testWins[2] + "\t percent:\t" + (double)testWins[2]/num);
+		System.out.println("3kind: \t\t" + testWins[3] + "\t percent:\t" + (double)testWins[3]/num);
+		System.out.println("str8: \t\t" + testWins[4] + "\t percent:\t" + (double)testWins[4]/num);
+		System.out.println("flush: \t\t" + testWins[5] + "\t percent:\t" + (double)testWins[5]/num);
+		System.out.println("fullhouse: \t" + testWins[6] + "\t percent:\t" + (double)testWins[6]/num);
+		System.out.println("4kind: \t\t" + testWins[7] + "\t percent:\t" + (double)testWins[7]/num);
+		System.out.println("str8flush: \t" + testWins[8] + "\t percent:\t" + (double)testWins[8]/num);
+		System.out.println("royal: \t\t" + testWins[9] + "\t percent:\t" + (double)testWins[9]/num);
 		
 	}
 }

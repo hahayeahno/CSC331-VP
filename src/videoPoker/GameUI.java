@@ -14,6 +14,7 @@ public class GameUI {
 	public static void main(String[] args) {
 		GameUI gui = new GameUI();
 		gui.play();
+		//gui.testPlay();
 	}
 	
 	public int getBet() {
@@ -83,4 +84,11 @@ public class GameUI {
 		}
 		System.out.println("Congratulations, " + player + "! You ended with " + credits + " credits!");
 	}
+	
+	public void testPlay() {
+		Game game = new Game();
+		
+		game.testWins();
+	}
 }
+
