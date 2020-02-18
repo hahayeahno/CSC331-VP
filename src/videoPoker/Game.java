@@ -69,31 +69,35 @@ public class Game {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter which cards you would like to swap as comma separated integers (ex. 1, 2, 4)");
 		String input = in.nextLine();			//TODO: Make user-proof
-		String [] strToSwap = input.split(", ");
-		for (int i = 0; i < strToSwap.length; i++) {
-			toSwap.add(Integer.parseInt(strToSwap[i]));
-		}
-		//in.close();
-		System.out.println(toSwap.toString());
-		for (int i = 0; i < toSwap.size(); i++) {
-			int cardnum = toSwap.get(i);
-			if (cardnum == 1) {
-				hand.setFirstCard(deck.getTopCard());
+		if (input.length() > 0) {
+			String [] strToSwap = input.split(", ");
+		
+			
+			for (int i = 0; i < strToSwap.length; i++) {
+				toSwap.add(Integer.parseInt(strToSwap[i]));
 			}
-			else if (cardnum == 2) {
-				hand.setSecondCard(deck.getTopCard());
-			}
-			else if (cardnum == 3) {
-				hand.setThirdCard(deck.getTopCard());
-			}
-			else if (cardnum == 4) {
-				hand.setFourthCard(deck.getTopCard());
-			}
-			else if (cardnum == 5) {
-				hand.setFifthCard(deck.getTopCard());
-			}
-			else {
+		
+			System.out.println(toSwap.toString());
+			for (int i = 0; i < toSwap.size(); i++) {
+				int cardnum = toSwap.get(i);
+				if (cardnum == 1) {
+					hand.setFirstCard(deck.getTopCard());
+				}
+				else if (cardnum == 2) {
+					hand.setSecondCard(deck.getTopCard());
+				}
+				else if (cardnum == 3) {
+					hand.setThirdCard(deck.getTopCard());
+				}
+				else if (cardnum == 4) {
+					hand.setFourthCard(deck.getTopCard());
+				}
+				else if (cardnum == 5) {
+					hand.setFifthCard(deck.getTopCard());
+				}
+				else {
 				
+				}
 			}
 
 		}
