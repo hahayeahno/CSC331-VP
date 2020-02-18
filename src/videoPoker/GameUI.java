@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class GameUI {
 
 	Scanner input = new Scanner(System.in);
-	final String[][] PAYOUT_TABLE = {{"You lose", "0"}, {"One Pair", "1"}, {"Two Pair", "2"}, {"Three of a Kind", "3"}, 
-			{"Straight", "4"}, {"Flush", "6"}, {"Full House", "9"}, {"Four of a Kind", "25"}, {"Straight Flush", "50"}, 
-			{"Royal Flush", "250"}};
+	final String[][] PAYOUT_TABLE = 
+			{{"You lose", "0"}, {"One Pair", "1"}, {"Two Pair", "2"}, {"Three of a Kind", "3"}, {"Straight", "4"}, 
+			{"Flush", "6"}, {"Full House", "9"}, {"Four of a Kind", "25"}, {"Straight Flush", "50"}, {"Royal Flush", "250"}};
 	String player;
 	int credits;
 	
@@ -18,7 +18,7 @@ public class GameUI {
 	
 	public int getBet() {
 		System.out.println("What would you like to bet on this hand?");
-		int num = input.nextInt();
+		int num = getIntInput();
 		if (num > credits) {
 			System.out.println("Sorry, you can't bet more credits than you have. Please try again.");
 			return getBet();
@@ -35,7 +35,7 @@ public class GameUI {
 	
 	public int getCredits() {
 		System.out.println("How many credits do you want to start with?");
-		int credits = Integer.parseInt(input.nextLine()); //make user safe
+		int credits = getIntInput();
 		return credits;
 	}
 
@@ -46,6 +46,19 @@ public class GameUI {
 			}
 		}
 		return 0;
+	}
+	
+	public int getIntInput() {
+		try {
+			String in = input.nextLine();
+			int num = Integer.parseInt(in);
+			return num;
+		}
+		catch (Exception e) {
+			System.out.println("It doesn't look like you entered a number. Please try again.");
+			return getIntInput();
+		}
+		
 	}
 	
 	public void play() {

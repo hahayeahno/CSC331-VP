@@ -6,7 +6,7 @@ import java.util.Scanner;
 //import java.util.string;
 /*
  * winning hands:				odds			payout:		condition:
- * pair jacks or better 		1.36:1			1:1			a pair higher than a jack
+ * pair jacks or better 		1.36:1			1:1			a pair higher than a jack		(the probability of this one is too  high, from a math standpoint)
  * two pair						20.0:1			2:1			2 pairs of any rank (3,3 and 6,6)
  * three of a kind				46.3:1			3:1			3 cards of the same rank
  * Straight						254:1			4:1			5 cards of sequential rank
@@ -40,14 +40,15 @@ import java.util.Scanner;
  * 
  * 
  * 
- * todo: swap cards, payout
+ * TODO: make user safe
  */
 
 public class Game {
 	final static String WIN_TYPES[] = {"You lose", "One Pair","Two Pair", "Three of a Kind", "Straight", "Flush", "Full House", "Four of a Kind", "Straight Flush", "Royal Flush"};	
-	//static String winType;
 	private Deck deck = new Deck();
 	private Hand hand = new Hand();
+	private Scanner in = new Scanner(System.in);
+	
 	
 	public Game() {
 		deck = new Deck();
@@ -63,45 +64,42 @@ public class Game {
 	}
 	
 	public void swapCards(Hand hand) {
-		//choose which cards to swap
-		//swap them with a new card from deck
 		List<Integer> toSwap = new ArrayList<Integer>();
-		Scanner in = new Scanner(System.in);
+		//Scanner in = new Scanner(System.in);
 		System.out.println("Please enter which cards you would like to swap as comma separated integers (ex. 1, 2, 4)");
 		String input = in.nextLine();			//TODO: Make user-proof
-		if (input.length() > 0) {
-			String [] strToSwap = input.split(", ");
-		
+		try {
+			if (input.length() > 0) {
+				String [] strToSwap = input.split(", ");
 			
-			for (int i = 0; i < strToSwap.length; i++) {
-				toSwap.add(Integer.parseInt(strToSwap[i]));
-			}
-		
-			System.out.println(toSwap.toString());
-			for (int i = 0; i < toSwap.size(); i++) {
-				int cardnum = toSwap.get(i);
-				if (cardnum == 1) {
-					hand.setFirstCard(deck.getTopCard());
-				}
-				else if (cardnum == 2) {
-					hand.setSecondCard(deck.getTopCard());
-				}
-				else if (cardnum == 3) {
-					hand.setThirdCard(deck.getTopCard());
-				}
-				else if (cardnum == 4) {
-					hand.setFourthCard(deck.getTopCard());
-				}
-				else if (cardnum == 5) {
-					hand.setFifthCard(deck.getTopCard());
-				}
-				else {
 				
+				for (int i = 0; i < strToSwap.length; i++) {
+					toSwap.add(Integer.parseInt(strToSwap[i]));
+				}
+				for (int i = 0; i < toSwap.size(); i++) {
+					int cardnum = toSwap.get(i);
+					if (cardnum == 1) {
+						hand.setFirstCard(deck.getTopCard());
+					}
+					else if (cardnum == 2) {
+						hand.setSecondCard(deck.getTopCard());
+					}
+					else if (cardnum == 3) {
+						hand.setThirdCard(deck.getTopCard());
+					}
+					else if (cardnum == 4) {
+						hand.setFourthCard(deck.getTopCard());
+					}
+					else if (cardnum == 5) {
+						hand.setFifthCard(deck.getTopCard());
+					}
 				}
 			}
-
 		}
-		
+		catch (Exception e) {
+			System.out.println("Something went wrong. Please enter comma separated values with a space in between them.\n");
+			swapCards(hand);
+		}
 	}
 	
 	public String checkWin(Hand hand) {
