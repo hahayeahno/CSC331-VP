@@ -3,7 +3,7 @@ package videoPoker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-//import java.util.string;
+
 /*
  * winning hands:				odds			payout:		condition:
  * pair jacks or better 		7.7:1			1:1			a pair higher than a jack		
@@ -67,9 +67,8 @@ public class Game {
 	
 	public void swapCards(Hand hand) {
 		List<Integer> toSwap = new ArrayList<Integer>();
-		//Scanner in = new Scanner(System.in);
 		System.out.println("Please enter which cards you would like to swap as comma separated integers (ex. 1, 2, 4)");
-		String input = in.nextLine();			//TODO: Make user-proof
+		String input = in.nextLine();			
 		try {
 			if (input.length() > 0) {
 				String [] strToSwap = input.split(", ");

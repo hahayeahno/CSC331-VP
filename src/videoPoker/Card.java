@@ -1,7 +1,5 @@
 package videoPoker;
 
-//import java.util.Arrays;
-
 public class Card {
 
 	private int value;

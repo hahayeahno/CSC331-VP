@@ -1,7 +1,5 @@
 package videoPoker;
 
-//maybe
-
 public class Hand {
 
 	private Card firstCard;

@@ -14,7 +14,6 @@ public class GameUI {
 	public static void main(String[] args) {
 		GameUI gui = new GameUI();
 		gui.play();
-		//gui.testPlay();
 	}
 	
 	public int getBet() {
