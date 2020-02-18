@@ -6,7 +6,7 @@ import java.util.Scanner;
 //import java.util.string;
 /*
  * winning hands:				odds			payout:		condition:
- * pair jacks or better 		1.36:1			1:1			a pair higher than a jack		(the probability of this one is too  high, from a math standpoint)
+ * pair jacks or better 		7.7:1			1:1			a pair higher than a jack		
  * two pair						20.0:1			2:1			2 pairs of any rank (3,3 and 6,6)
  * three of a kind				46.3:1			3:1			3 cards of the same rank
  * Straight						254:1			4:1			5 cards of sequential rank
@@ -16,10 +16,7 @@ import java.util.Scanner;
  * Straight Flush				72192:1			50:1		Straight of one suit
  * Royal Flush					649739:1		250:1		Ace high straight of one suit(10,jack,queen,king,ace)
  * 
- * real odds
- * pair of anything				2.37:1
- * pair of jacks or better		7.7:1		from math
- * everything else is correct
+ * loss							1.26:1			0:1			
  * 
  * Rules:
  * 1: shuffle deck
