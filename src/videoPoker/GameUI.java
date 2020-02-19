@@ -29,7 +29,7 @@ public class GameUI {
 	
 	public String getName() {
 		System.out.println("Please enter your name:");
-		String name = input.nextLine();
+		String name = input.nextLine().trim();
 		return name;
 	}
 	
@@ -70,14 +70,14 @@ public class GameUI {
 		String winType;
 		
 		boolean keepPlaying = true;
-		while(keepPlaying) {
+		while(keepPlaying && credits > 0) {
 			bet = getBet();
 			
 			winType = game.play();
 			credits += payout(bet, winType);
 			
 			System.out.println("You currently have " + credits + " credits, would you like to keep playing? (Y/N)");
-			if (!input.next().trim().equalsIgnoreCase("Y") || credits < 0) {
+			if (!input.nextLine().trim().equalsIgnoreCase("Y")) {
 				keepPlaying = false;
 			}
 		}
@@ -86,7 +86,6 @@ public class GameUI {
 	
 	public void testPlay() {
 		Game game = new Game();
-		
 		game.testWins();
 	}
 }

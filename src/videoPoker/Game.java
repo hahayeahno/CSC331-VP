@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /*
  * winning hands:				odds			payout:		condition:
- * pair jacks or better 		7.7:1			1:1			a pair higher than a jack		
+ * pair jacks or better 		7.69:1			1:1			a pair higher than a jack		
  * two pair						20.0:1			2:1			2 pairs of any rank (3,3 and 6,6)
  * three of a kind				46.3:1			3:1			3 cards of the same rank
  * Straight						254:1			4:1			5 cards of sequential rank
@@ -307,7 +307,7 @@ public class Game {
 	public void testWins() {
 		String str;
 		int[] testWins = {0,0,0,0,0,0,0,0,0,0};
-		int num = 1000000;
+		int num = 10000000;
 		for (int i = 0; i < num; i++) {
 			str = testPlay();
 			for (int j = 0; j < WIN_TYPES.length; j++) {
@@ -316,6 +316,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println("Total: \t\t" + num);
 		System.out.println("loss: \t\t" + testWins[0] + "\t percent:\t" + (double)testWins[0]/num);
 		System.out.println("pair: \t\t" + testWins[1] + "\t percent:\t" + (double)testWins[1]/num);
 		System.out.println("2pair: \t\t" + testWins[2] + "\t percent:\t" + (double)testWins[2]/num);
